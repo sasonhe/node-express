@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<style>
+		.price{border: 1px solid #333;padding: 2px 3px;margin: 0 3px;text-decoration: none;color: #333;}
+		.price.active{border:1px solid red;color: red;}
+		li{list-style: none;}
+		
+	</style>	
+</head>
+<body>
+	<div id="app">
+		<child :cartype-list='cartypeList' :car-list='carList'></child>
+	
+	</div>
+
+	<script>
+		var carList = [
+			{name:'本田', price: 10},
+			{name:'现代', price: 20},
+			{name:'奥迪', price: 30},
+			{name:'长安', price: 2},
+			{name:'哈佛', price: 1},
+			{name:'大众', price: 24},
+			{name:'宝马', price: 23},
+			{name:'长安', price: 12},
+			{name:'哈佛', price: 14},
+			{name:'大众', price: 18},
+			{name:'长安', price: 6},
+			{name:'哈佛', price: 9},
+			{name:'大众', price: 5},			
+			{name:'宝骏', price: 25},			
+			{name:'大牛', price: 130},
+			{name:'野马', price: 220}
+		]		
+		var child = {
+			props:['cartype-list','car-list'],
+			template:'<div>'+'价格：'+'<a href="javascript:;" class="price" ' +
+		    'v-for="price in cartypeList" ' +
+		    '@click="selectPrice(price)" ' +
+		    ':class = "{active:currentPrice == price}">' + '{{price.label}}' + '</a>' +
+		    '<ul><li v-for="(car,index) in carListFilter">'+'{{index}}'+'：'+
+		    '{{car.name}}' +'：'+ '{{car.price }}'+'万'+'</li></ul></div>',
+			data:function(){
+				return{
+					currentPrice:''
+				}
+			},
+			methods:{
+				selectPrice:function(price){
+					this.currentPrice = price;
+				}
+			},
+			computed:{
+				carListFilter:function(){
+					var list = []
+					if(!this.currentPrice){
+						list = this.currentPrice;
+					}else if(this.currentPrice.value == '<5'){
+						list = this.carList.filter(function(car){
+							return car.price < 5
+						})
+					}else if(this.currentPrice.value == '5-10'){
+						list = this.carList.filter(function(car){
+							return car.price <=10 && car.price>=5
+						})
+					}else if(this.currentPrice.value == '10-15'){
+						list = this.carList.filter(function(car){
+							return car.price <=15 && car.price>=10
+						})
+					}else if(this.currentPrice.value == '15-20'){
+						list = this.carList.filter(function(car){
+							return car.price <=20 && car.price>=15
+						})
+					}else if(this.currentPrice.value == '20-25'){
+						list = this.carList.filter(function(car){
+							return car.price <=25 && car.price>=20
+						})
+					}else if(this.currentPrice.value == '>25'){
+						list = this.carList.filter(function(car){
+							return car.price > 25
+						})
+					}
+					return list;
+				}
+			}								
+		}
+		
+
+				
+
+		new Vue({
+			el:'#app',
+			data:{
+				carList:carList,
+				cartypeList:[
+					{label:'小于5万', value:'<5'},
+					{label:'5万-10万', value:'5-10'},
+					{label:'10万-15万', value:'10-15'},
+					{label:'15万-20万', value:'15-20'},
+					{label:'20万-25万', value:'20-25'},
+					{label:'大于25万', value:'>25'}
+				]
+				
+			},
+			
+			components:{
+				"child":child
+			}
+		})
+	</script>
+</body>
+</html>
