@@ -1,0 +1,9 @@
+		html{color:#000;background:#fff;}
+		body{font:12px/1.5 "Microsoft Yahei",Tahoma,Arial,Helvetica,sans-serif;word-break:break-all;word-wrap:break-word;}
+		body,h1,h2,h3,h4,h5,h6,p,dl,dd{margin:0;}ul,ol,input{margin:0;padding:0;}li{list-style: none;}
+		img{border:none;vertical-align:middle;}table{border-collapse:collapse;border-spacing:0;}
+		em,i{font-style:normal}b,strong,th{font-weight:normal;}
+		textarea{resize:none;}button,input,textarea{/*background: none; border:none;*/font-family:"Microsoft Yahei",Tahoma,Arial,Helvetica,sans-serif;vertical-align:middle;}/*input:focus{outline: none;}*/
+
+		a{color: #333333; text-decoration: none;}
+		a:hover{text-decoration:inline;color: #cc0000;}
